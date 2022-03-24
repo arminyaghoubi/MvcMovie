@@ -1,35 +1,60 @@
-﻿@model IEnumerable<MvcMovie.Models.Movie>
+﻿@model MovieGenreViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Movies List</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+<form asp-controller="Movies" asp-action="Index" method="get">
+    <div class="row mb-3">
+        <div class="col-md-5">
+            <div class="row">
+                <label asp-for="Search" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Search" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <label asp-for="Genre" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="Genre" asp-items="Model.Genres" class="form-select">
+                        <option value="">All</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-outline-primary">Search</button>
+        </div>
+    </div>
+</form>
 <div class="table-responsive">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Title)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                    @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().ReleaseDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Genre)
+                    @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Genre)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
+                    @Html.DisplayNameFor(model => model.Movies.FirstOrDefault().Price)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Movies)
             {
                 <tr>
                     <td>
